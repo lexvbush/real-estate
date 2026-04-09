@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services & Pricing — Alexa Bush, Real Estate Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #111d2e;
+    --navy-mid: #1c2f47;
+    --blue: #5badd6;
+    --blue-light: #8ecce8;
+    --blue-pale: #dff0f8;
+    --cream: #f7f5f1;
+    --white: #ffffff;
+    --text: #1e2a38;
+    --muted: #6b7f93;
+    --border: #d8e8f0;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); font-size: 13px; line-height: 1.7; }
+
+  .header { background: var(--navy); padding: 60px 64px 52px; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 360px; height: 360px; border-radius: 50%; border: 1px solid rgba(91,173,214,0.12); }
+  .header::after { content: ''; position: absolute; bottom: -100px; right: 100px; width: 220px; height: 220px; border-radius: 50%; border: 1px solid rgba(91,173,214,0.08); }
+  .header-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+  .header-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--blue); }
+  .header h1 { font-family: 'Cormorant Garamond', serif; font-size: 50px; font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 12px; }
+  .header h1 em { color: var(--blue-light); font-style: italic; }
+  .header-sub { color: rgba(255,255,255,0.45); font-size: 13px; font-weight: 300; max-width: 500px; line-height: 1.7; }
+  .header-sub a { color: var(--blue-light); text-decoration: none; }
+
+  .page { max-width: 1020px; margin: 0 auto; padding: 52px 36px 90px; }
+
+  .section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; margin-top: 60px; }
+  .section-label:first-of-type { margin-top: 0; }
+  .section-label .num { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--blue); min-width: 22px; }
+  .section-label h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--navy); letter-spacing: 0.02em; }
+  .section-label .rule { flex: 1; height: 1px; background: var(--border); }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+  .service-card { background: var(--white); border-top: 3px solid var(--navy); padding: 26px 22px 22px; transition: background 0.2s; }
+  .service-card:hover { background: var(--blue-pale); }
+  .service-card .cat { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+  .service-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 12px; line-height: 1.3; }
+  .service-card ul { list-style: none; }
+  .service-card ul li { font-size: 12px; color: #3a4a5a; padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; font-weight: 300; }
+  .service-card ul li:last-child { border-bottom: none; }
+  .service-card ul li::before { content: '—'; color: var(--blue); font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+
+  .pricing-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--border); }
+  .pricing-table thead tr { background: var(--navy); }
+  .pricing-table thead th { padding: 14px 18px; text-align: left; font-size: 9.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .pricing-table thead th:last-child, .pricing-table thead th:nth-child(3) { text-align: right; }
+  .pricing-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  .pricing-table tbody tr:hover { background: var(--blue-pale); }
+  .pricing-table tbody tr.group-header { background: #e8f3f9; pointer-events: none; }
+  .pricing-table tbody tr.group-header td { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); padding: 9px 18px; }
+  .pricing-table td { padding: 12px 18px; font-size: 12px; }
+  .pricing-table td:first-child { font-weight: 500; color: var(--navy); font-size: 12.5px; }
+  .pricing-table td:nth-child(2) { color: var(--muted); font-size: 11.5px; font-weight: 300; max-width: 260px; }
+  .pricing-table td:nth-child(3), .pricing-table td:last-child { text-align: right; }
+  .pricing-table td.price { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--navy); }
+  .pricing-table td.range { font-size: 11px; color: var(--muted); font-weight: 300; }
+
+  .bundles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .bundle-card { background: var(--white); border: 1px solid var(--border); padding: 30px 24px; position: relative; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+  .bundle-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(91,173,214,0.1); }
+  .bundle-card.featured { background: var(--navy); border-color: var(--navy); }
+  .bundle-card .badge { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--blue); color: var(--navy); font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 14px; white-space: nowrap; }
+  .bundle-card .tier { font-size: 9.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+  .bundle-card.featured .tier { color: var(--blue-light); }
+  .bundle-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .bundle-card.featured h3 { color: var(--white); }
+  .bundle-price { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--navy); line-height: 1; margin: 16px 0 4px; }
+  .bundle-card.featured .bundle-price { color: var(--white); }
+  .bundle-sub { font-size: 10px; color: var(--muted); margin-bottom: 20px; font-weight: 300; }
+  .bundle-card.featured .bundle-sub { color: rgba(255,255,255,0.45); }
+  .bundle-features { list-style: none; text-align: left; border-top: 1px solid var(--border); padding-top: 18px; }
+  .bundle-card.featured .bundle-features { border-top-color: rgba(255,255,255,0.12); }
+  .bundle-features li { font-size: 12px; color: #3a4a5a; padding: 4px 0; display: flex; gap: 9px; font-weight: 300; }
+  .bundle-card.featured .bundle-features li { color: rgba(255,255,255,0.75); }
+  .bundle-features li::before { content: '✓'; color: var(--blue); font-weight: 600; font-size: 11px; flex-shrink: 0; }
+  .bundle-card.featured .bundle-features li::before { color: var(--blue-light); }
+
+  .notes-box { background: var(--navy); color: rgba(255,255,255,0.7); padding: 30px 36px; margin-top: 52px; border-left: 4px solid var(--blue); }
+  .notes-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--white); font-weight: 400; margin-bottom: 14px; }
+  .notes-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 7px 48px; }
+  .notes-list li { font-size: 12px; font-weight: 300; display: flex; gap: 9px; }
+  .notes-list li::before { content: '→'; color: var(--blue); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Freelance Services Overview</div>
+  <h1>Real Estate <em>Assistant</em><br>Services & Pricing</h1>
+  <p class="header-sub">Project-based real estate support across all of Connecticut — Hartford, Fairfield, New Haven, Litchfield, Tolland &amp; beyond. <a href="index.html">← Back to home</a></p>
+</div>
+
+<div class="page">
+
+  <div class="section-label">
+    <span class="num">01</span>
+    <h2>Service Categories</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="cat">Administrative</div>
+      <h3>Operations & Office Support</h3>
+      <ul>
+        <li>Transaction timeline tracking</li>
+        <li>Deadline & contingency management</li>
+        <li>Vendor coordination (inspectors, attorneys)</li>
+        <li>Email inbox management & drafting</li>
+        <li>Calendar scheduling & appointment setting</li>
+        <li>Data entry into CRM systems</li>
+        <li>Document organization & file management</li>
+        <li>Listing input into MLS</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="cat">Reporting & Research</div>
+      <h3>Market Analysis & Reports</h3>
+      <ul>
+        <li>Comparative Market Analysis (CMA)</li>
+        <li>Rental CMA / comp reports</li>
+        <li>Neighborhood market summaries</li>
+        <li>Days-on-market trend reports</li>
+        <li>Investment property analysis sheets</li>
+        <li>Buyer/seller presentation packets</li>
+        <li>Zoning & permit research</li>
+        <li>Portfolio performance summaries</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="cat">Client Services</div>
+      <h3>Buyer & Tenant Support</h3>
+      <ul>
+        <li>Apartment & home showings</li>
+        <li>Open house hosting & sign-in management</li>
+        <li>Client intake & pre-qualification interviews</li>
+        <li>Follow-up communication sequences</li>
+        <li>Showing feedback collection</li>
+        <li>Lease application assistance</li>
+        <li>Move-in / move-out coordination</li>
+        <li>Tenant onboarding packets</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="cat">Marketing</div>
+      <h3>Listing & Brand Marketing</h3>
+      <ul>
+        <li>Listing description copywriting</li>
+        <li>Social media post creation</li>
+        <li>Email newsletter drafting</li>
+        <li>Flyer & postcard design briefs</li>
+        <li>Open house promotion posts</li>
+        <li>Canva graphic creation</li>
+        <li>Photography coordination</li>
+        <li>Virtual tour setup support</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="cat">Transaction Support</div>
+      <h3>Contract-to-Close Coordination</h3>
+      <ul>
+        <li>Offer preparation & submittal support</li>
+        <li>Earnest money tracking</li>
+        <li>Inspection scheduling & follow-up</li>
+        <li>Lender & attorney liaison</li>
+        <li>Closing checklist management</li>
+        <li>Document collection & review</li>
+        <li>Title company communication</li>
+        <li>Post-close file archiving</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="cat">Property Management Support</div>
+      <h3>Landlord & Investor Assistance</h3>
+      <ul>
+        <li>Rental listing creation & posting</li>
+        <li>Tenant screening coordination</li>
+        <li>Lease renewal tracking</li>
+        <li>Maintenance request logging</li>
+        <li>Rent roll spreadsheet maintenance</li>
+        <li>Vacancy marketing packets</li>
+        <li>Annual property performance reports</li>
+        <li>Utility & expense tracking</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-label">
+    <span class="num">02</span>
+    <h2>Per-Project Pricing</h2>
+    <div class="rule"></div>
+  </div>
+
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>What's Included</th>
+        <th>Flat Rate</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="group-header"><td colspan="4">Administrative</td></tr>
+      <tr><td>MLS Listing Input</td><td>Full data entry, photo upload, compliance check</td><td class="price">$100</td><td class="range">Per listing</td></tr>
+      <tr><td>CRM Data Entry / Cleanup</td><td>Contact import, tag/categorize, deduplication</td><td class="price">$65–$195</td><td class="range">Based on volume</td></tr>
+      <tr><td>Email Drafting (batch)</td><td>5 templated follow-up or outreach emails</td><td class="price">$100</td><td class="range">Per batch of 5</td></tr>
+      <tr><td>Transaction File Setup</td><td>Folder structure, checklist, deadline calendar</td><td class="price">$80</td><td class="range">Per transaction</td></tr>
+
+      <tr class="group-header"><td colspan="4">Reports & Research</td></tr>
+      <tr><td>Rental CMA Report</td><td>4-comp card report, $/sqft analysis, PDF export</td><td class="price">$130</td><td class="range">Per subject property</td></tr>
+      <tr><td>Sales CMA / Market Analysis</td><td>6–8 comps, pricing recommendation, presentation-ready</td><td class="price">$195</td><td class="range">Per property</td></tr>
+      <tr><td>Neighborhood Market Report</td><td>Trend data, avg DOM, price/sqft, absorption rate</td><td class="price">$165</td><td class="range">Per area</td></tr>
+      <tr><td>Investment Property Analysis</td><td>Cap rate, NOI, cash-on-cash, expense breakdown</td><td class="price">$230</td><td class="range">Per property</td></tr>
+
+      <tr class="group-header"><td colspan="4">Client & Showing Services</td></tr>
+      <tr><td>Property Showing</td><td>Travel, show, collect feedback, debrief notes</td><td class="price">$65–$100</td><td class="range">Per showing + mileage</td></tr>
+      <tr><td>Open House Hosting</td><td>Setup, sign-in, prospect follow-up sheet</td><td class="price">$165–$230</td><td class="range">Up to 3 hrs</td></tr>
+      <tr><td>Buyer/Tenant Intake Package</td><td>Interview, needs assessment doc, search criteria sheet</td><td class="price">$110</td><td class="range">Per client</td></tr>
+
+      <tr class="group-header"><td colspan="4">Marketing</td></tr>
+      <tr><td>Listing Description Copy</td><td>SEO-aware, compelling narrative, 200–300 words</td><td class="price">$80</td><td class="range">Per listing</td></tr>
+      <tr><td>Social Media Content Pack</td><td>5 captions + hashtag sets + posting schedule</td><td class="price">$130</td><td class="range">Per pack</td></tr>
+      <tr><td>Flyer / Postcard Design</td><td>Canva or brief for designer, print-ready</td><td class="price">$100–$165</td><td class="range">Per piece</td></tr>
+      <tr><td>Email Newsletter</td><td>Monthly market update, 400–600 words, formatted</td><td class="price">$130</td><td class="range">Per issue</td></tr>
+
+      <tr class="group-header"><td colspan="4">Transaction Coordination</td></tr>
+      <tr><td>Contract-to-Close Package</td><td>Full coordination from accepted offer through closing</td><td class="price">$455–$650</td><td class="range">Per transaction side</td></tr>
+      <tr><td>Offer Package Prep</td><td>Assemble offer docs, cover letter, submit to agent</td><td class="price">$100</td><td class="range">Per offer</td></tr>
+
+      <tr class="group-header"><td colspan="4">Property Management Support</td></tr>
+      <tr><td>Rental Listing Creation</td><td>Photos brief, copy, post to Zillow/Apartments.com</td><td class="price">$120</td><td class="range">Per unit</td></tr>
+      <tr><td>Tenant Screening Coordination</td><td>Application review, credit/background facilitation</td><td class="price">$100</td><td class="range">Per applicant</td></tr>
+      <tr><td>Rent Roll Spreadsheet</td><td>Build or update monthly tracking sheet</td><td class="price">$105–$195</td><td class="range">Based on unit count</td></tr>
+    </tbody>
+  </table>
+
+  <div class="section-label">
+    <span class="num">03</span>
+    <h2>Monthly Retainer Packages</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="bundles-grid">
+    <div class="bundle-card">
+      <div class="tier">Starter</div>
+      <h3>The Essentials</h3>
+      <div class="bundle-price">$520</div>
+      <div class="bundle-sub">per month</div>
+      <ul class="bundle-features">
+        <li>Up to 5 hrs of admin support</li>
+        <li>1 CMA report per month</li>
+        <li>MLS input for 2 listings</li>
+        <li>3 social media captions</li>
+        <li>48-hr standard turnaround</li>
+      </ul>
+    </div>
+    <div class="bundle-card featured">
+      <div class="badge">Most Popular</div>
+      <div class="tier">Growth</div>
+      <h3>The Full Stack</h3>
+      <div class="bundle-price">$1,105</div>
+      <div class="bundle-sub">per month</div>
+      <ul class="bundle-features">
+        <li>Up to 12 hrs of support</li>
+        <li>2 CMA or market reports</li>
+        <li>MLS input for 4 listings</li>
+        <li>1 transaction coordination</li>
+        <li>Monthly email newsletter</li>
+        <li>Social content pack (5 posts)</li>
+        <li>Priority 48-hr turnaround</li>
+      </ul>
+    </div>
+    <div class="bundle-card">
+      <div class="tier">Investor / PM</div>
+      <h3>The Portfolio</h3>
+      <div class="bundle-price">$1,560</div>
+      <div class="bundle-sub">per month</div>
+      <ul class="bundle-features">
+        <li>Up to 20 hrs of support</li>
+        <li>Unlimited rent roll updates</li>
+        <li>2 investment analysis reports</li>
+        <li>Tenant screening (up to 4)</li>
+        <li>Vacancy marketing support</li>
+        <li>Dedicated availability window</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="notes-box">
+    <h4>Business Policies & Notes</h4>
+    <ul class="notes-list">
+      <li>Standard turnaround is 48 business hours</li>
+      <li>Rush delivery (under 24 hrs) adds 30–50% to project fee</li>
+      <li>Mileage billed at IRS rate for all in-person services</li>
+      <li>50% deposit required before project kickoff</li>
+      <li>1 revision round included; additional rounds at $50/hr</li>
+      <li>Retainer packages billed on the 1st of each month</li>
+      <li>Unused retainer hours do not roll over</li>
+      <li>Serving agents & investors statewide across Connecticut</li>
+      <li>Contracts & NDAs available upon request</li>
+      <li>Pricing subject to revision after initial 6-month period</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>
