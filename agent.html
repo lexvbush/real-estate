@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexa Bush — Connecticut Real Estate Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #111d2e;
+    --navy-mid: #1c2f47;
+    --navy-light: #243654;
+    --blue: #5badd6;
+    --blue-light: #8ecce8;
+    --blue-pale: #dff0f8;
+    --blue-ultra: #f0f8fd;
+    --cream: #f7f5f1;
+    --white: #ffffff;
+    --text: #1e2a38;
+    --muted: #6b7f93;
+    --border: #d8e8f0;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 60px;
+    background: rgba(17,29,46,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(91,173,214,0.12);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--white); letter-spacing: 0.04em; text-decoration: none; }
+  .nav-logo span { color: var(--blue); font-style: italic; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue-light); }
+  .nav-cta { font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); background: var(--blue); padding: 10px 22px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .nav-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 700px 600px at 65% 40%, rgba(91,173,214,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 350px 350px at 15% 85%, rgba(91,173,214,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 64px 80px 64px;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero-eyebrow .line { width: 36px; height: 1px; background: var(--blue); }
+  .hero-eyebrow span { font-size: 10.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5.2vw, 68px);
+    font-weight: 300; color: var(--white); line-height: 1.08; margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero h1 em { color: var(--blue-light); font-style: italic; }
+  .hero h1 strong { display: block; font-weight: 600; }
+
+  .hero-desc {
+    font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.58); line-height: 1.85;
+    max-width: 420px; margin-bottom: 44px;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+  }
+  .btn-primary { background: var(--blue); color: var(--navy); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: background 0.2s, transform 0.15s; display: inline-block; }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); }
+  .btn-ghost { border: 1px solid rgba(91,173,214,0.4); color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: border-color 0.2s, color 0.2s; display: inline-block; }
+  .btn-ghost:hover { border-color: var(--blue); color: var(--blue-light); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 64px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    opacity: 0; animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .stat-item .num { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--white); line-height: 1; }
+  .stat-item .num span { color: var(--blue); }
+  .stat-item .label { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  /* hero right — abstract property card stack */
+  .hero-right {
+    background: var(--navy-mid);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; top: 0; left: -60px; bottom: 0; width: 120px;
+    background: var(--navy);
+    transform: skewX(-4deg);
+    z-index: 1;
+  }
+  .prop-stack { position: relative; width: 340px; z-index: 2; }
+  .prop-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(91,173,214,0.18);
+    padding: 22px 26px; margin-bottom: 14px;
+    opacity: 0; transform: translateX(30px);
+  }
+  .prop-card:nth-child(1) { animation: slideIn 0.6s 0.5s forwards; }
+  .prop-card:nth-child(2) { animation: slideIn 0.6s 0.7s forwards; margin-left: 20px; }
+  .prop-card:nth-child(3) { animation: slideIn 0.6s 0.9s forwards; margin-left: 8px; }
+  .pc-type { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 7px; font-weight: 500; }
+  .pc-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--white); margin-bottom: 10px; }
+  .pc-row { display: flex; align-items: center; justify-content: space-between; }
+  .pc-location { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 300; }
+  .pc-tag { font-size: 9.5px; background: rgba(91,173,214,0.15); color: var(--blue-light); padding: 3px 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ── MARQUEE ── */
+  .marquee-strip { background: var(--blue); overflow: hidden; }
+  .marquee-inner { display: flex; white-space: nowrap; animation: marquee 30s linear infinite; padding: 13px 0; }
+  .marquee-inner span { font-size: 10.5px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); padding: 0 28px; flex-shrink: 0; }
+  .marquee-inner span.dot { color: rgba(17,29,46,0.3); padding: 0; }
+
+  /* ── WHO I HELP ── */
+  .help-section { padding: 100px 60px; background: var(--white); }
+  .section-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 3.2vw, 44px); font-weight: 300; color: var(--navy); line-height: 1.1; margin-bottom: 52px; }
+  .section-title em { font-style: italic; color: #3a8ab5; }
+
+  .four-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); }
+  .help-card { background: var(--white); padding: 36px 28px 32px; transition: background 0.2s; position: relative; overflow: hidden; }
+  .help-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .help-card:hover { background: var(--blue-ultra); }
+  .help-card:hover::after { transform: scaleX(1); }
+  .help-icon { font-size: 26px; margin-bottom: 18px; display: block; }
+  .help-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+  .help-card p { font-size: 13px; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+  /* ── PROCESS ── */
+  .process-section { background: var(--navy); padding: 100px 60px; }
+  .process-section .section-eyebrow { color: var(--blue); }
+  .process-section .section-title { color: var(--white); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(91,173,214,0.1); margin-top: 52px; }
+  .step { background: var(--navy); padding: 36px 28px; position: relative; }
+  .step-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-style: italic; font-weight: 300; color: rgba(91,173,214,0.15); line-height: 1; margin-bottom: 14px; display: block; }
+  .step h4 { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+  .step p { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.75; font-weight: 300; }
+  .step-arrow { position: absolute; top: 38px; right: -12px; color: var(--blue); font-size: 18px; opacity: 0.4; z-index: 1; }
+  .step:last-child .step-arrow { display: none; }
+
+  /* ── ABOUT ── */
+  .about-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; }
+  .about-left { background: var(--blue-ultra); padding: 80px 64px; display: flex; flex-direction: column; justify-content: center; }
+  .about-left .section-eyebrow { color: var(--blue); }
+  .about-left .section-title { margin-bottom: 22px; }
+  .about-left p { font-size: 14px; color: #3a5068; line-height: 1.85; font-weight: 300; margin-bottom: 16px; }
+  .cred-list { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .cred-list li { font-size: 12.5px; color: var(--navy); font-weight: 400; display: flex; align-items: center; gap: 10px; }
+  .cred-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+
+  .about-right { background: var(--navy); padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+  .value-row { display: flex; gap: 18px; align-items: flex-start; }
+  .value-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-style: italic; color: rgba(91,173,214,0.25); line-height: 1; flex-shrink: 0; width: 36px; }
+  .value-text h4 { font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 5px; letter-spacing: 0.02em; }
+  .value-text p { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.7; font-weight: 300; }
+
+  /* ── MARKET AREAS ── */
+  .market-section { padding: 100px 60px; background: var(--cream); }
+  .market-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 52px; }
+  .market-card { background: var(--white); border: 1px solid var(--border); padding: 32px 28px; transition: transform 0.2s, box-shadow 0.2s; }
+  .market-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(91,173,214,0.1); }
+  .market-card .m-label { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+  .market-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+  .market-card p { font-size: 12.5px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+  .market-card .m-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .m-tag { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); border: 1px solid var(--border); padding: 4px 10px; font-weight: 400; }
+
+  /* ── REVIEWS ── */
+  .review-section { background: var(--cream); padding: 100px 60px; }
+  .review-inner { max-width: 680px; margin: 0 auto; }
+  .review-sub { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.7; margin-bottom: 48px; }
+
+  .review-form { display: flex; flex-direction: column; gap: 22px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  .form-group label { font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); }
+
+  .form-group input[type="text"],
+  .form-group select,
+  .form-group textarea {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 13px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .form-group input[type="text"]:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--blue); }
+  .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
+  .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235badd6' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+
+  /* star rating — RTL trick */
+  .star-row { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; }
+  .star-row input[type="radio"] { display: none; }
+  .star-row .star { font-size: 32px; color: var(--border); cursor: pointer; transition: color 0.15s; line-height: 1; }
+  .star-row .star:hover,
+  .star-row .star:hover ~ .star,
+  .star-row input[type="radio"]:checked ~ label.star { color: var(--blue); }
+
+  .form-submit {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .form-submit:hover { background: var(--blue); color: var(--navy); transform: translateY(-2px); }
+  .form-note { font-size: 11px; color: var(--muted); font-weight: 300; margin-top: -8px; }
+
+  /* ── CONTACT ── */
+  .contact-section { background: var(--navy); padding: 110px 60px; text-align: center; position: relative; overflow: hidden; }
+  .contact-section::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; height: 700px; border-radius: 50%; border: 1px solid rgba(91,173,214,0.07); }
+  .contact-section::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 420px; height: 420px; border-radius: 50%; border: 1px solid rgba(91,173,214,0.1); }
+  .contact-inner { position: relative; z-index: 2; max-width: 580px; margin: 0 auto; }
+  .contact-section .section-eyebrow { margin-bottom: 14px; }
+  .contact-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+  .contact-title em { color: var(--blue-light); font-style: italic; }
+  .contact-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.8; font-weight: 300; margin-bottom: 44px; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .contact-email { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--blue-light); text-decoration: none; font-style: italic; display: block; margin-bottom: 36px; transition: color 0.2s; }
+  .contact-email:hover { color: var(--white); }
+  .contact-link { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); background: var(--blue); padding: 16px 48px; text-decoration: none; transition: background 0.2s; }
+  .contact-link:hover { background: var(--blue-light); }
+
+  /* ── FOOTER ── */
+  footer { background: #0a1520; padding: 28px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(91,173,214,0.08); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-logo span { color: var(--blue); font-style: italic; }
+  footer p { font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--blue); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 28px 60px; }
+    .help-section, .process-section, .market-section, .contact-section { padding: 60px 24px; }
+    .four-grid, .steps-grid { grid-template-columns: 1fr 1fr; }
+    .market-grid { grid-template-columns: 1fr; }
+    .about-section { grid-template-columns: 1fr; }
+    .about-left, .about-right { padding: 52px 28px; }
+    footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Alexa <span>Bush</span></a>
+  <ul class="nav-links">
+    <li><a href="#who">Who I Help</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#markets">Markets</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's Talk</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="line"></div>
+      <span>Connecticut Real Estate Agent</span>
+    </div>
+    <h1>
+      <strong>Find it. Sell it.</strong>
+      <em>Make it yours.</em>
+    </h1>
+    <p class="hero-desc">
+      Whether you're buying your first home, selling a property, finding a rental, or placing the right tenant — I guide you through every step with clarity and care across the Greater Hartford Region.
+    </p>
+    <div class="hero-btns">
+      <a href="#who" class="btn-primary">How I Can Help</a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="num">CT<span>+</span></div>
+        <div class="label">Licensed Agent</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">4</div>
+        <div class="label">Client Types</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">WH<span>+</span></div>
+        <div class="label">West Hartford & Beyond</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="prop-stack">
+      <div class="prop-card">
+        <div class="pc-type">For Buyers</div>
+        <div class="pc-title">Find Your Perfect Home</div>
+        <div class="pc-row">
+          <span class="pc-location">West Hartford, CT</span>
+          <span class="pc-tag">Guided Search</span>
+        </div>
+      </div>
+      <div class="prop-card">
+        <div class="pc-type">For Sellers</div>
+        <div class="pc-title">List & Close With Confidence</div>
+        <div class="pc-row">
+          <span class="pc-location">Greater Hartford Region</span>
+          <span class="pc-tag">Full Service</span>
+        </div>
+      </div>
+      <div class="prop-card">
+        <div class="pc-type">For Owners</div>
+        <div class="pc-title">Place the Right Tenant</div>
+        <div class="pc-row">
+          <span class="pc-location">Multi-Family & Residential</span>
+          <span class="pc-tag">Rental Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span>Buyers</span><span class="dot">·</span>
+    <span>Sellers</span><span class="dot">·</span>
+    <span>Renters</span><span class="dot">·</span>
+    <span>Landlords</span><span class="dot">·</span>
+    <span>West Hartford</span><span class="dot">·</span>
+    <span>Greater Hartford</span><span class="dot">·</span>
+    <span>First-Time Buyers</span><span class="dot">·</span>
+    <span>Multi-Family</span><span class="dot">·</span>
+    <span>Residential</span><span class="dot">·</span>
+    <span>Investment Properties</span><span class="dot">·</span>
+    <span>Buyers</span><span class="dot">·</span>
+    <span>Sellers</span><span class="dot">·</span>
+    <span>Renters</span><span class="dot">·</span>
+    <span>Landlords</span><span class="dot">·</span>
+    <span>West Hartford</span><span class="dot">·</span>
+    <span>Greater Hartford</span><span class="dot">·</span>
+    <span>First-Time Buyers</span><span class="dot">·</span>
+    <span>Multi-Family</span><span class="dot">·</span>
+    <span>Residential</span><span class="dot">·</span>
+    <span>Investment Properties</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- WHO I HELP -->
+<section class="help-section" id="who">
+  <div class="section-eyebrow">Who I Work With</div>
+  <h2 class="section-title">Real estate looks different<br>for everyone. <em>I meet you where you are.</em></h2>
+
+  <div class="four-grid">
+    <div class="help-card">
+      <span class="help-icon">🏡</span>
+      <h3>Buyers</h3>
+      <p>From your first showing to closing day, I help you navigate the search, understand the market, negotiate with confidence, and land a home that truly fits your life.</p>
+    </div>
+    <div class="help-card">
+      <span class="help-icon">📋</span>
+      <h3>Sellers</h3>
+      <p>Strategic pricing, polished presentation, and a smooth transaction from listing to close. I work to get you the best outcome — on your timeline.</p>
+    </div>
+    <div class="help-card">
+      <span class="help-icon">🔑</span>
+      <h3>Renters</h3>
+      <p>Finding the right apartment or home shouldn't be stressful. I help renters identify the best options in the area, tour properties, and secure their new place with ease.</p>
+    </div>
+    <div class="help-card">
+      <span class="help-icon">🏢</span>
+      <h3>Owners & Landlords</h3>
+      <p>Ready to rent your property? I help owners attract qualified tenants, market vacancies effectively, and navigate the leasing process from listing to signed lease.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title" style="color:var(--white);">A clear process from<br><em>first conversation to keys.</em></h2>
+
+  <div class="steps-grid">
+    <div class="step">
+      <span class="step-num">01</span>
+      <h4>We Connect</h4>
+      <p>A quick call or message to understand your goals, timeline, and what you're looking for — no pressure, just conversation.</p>
+      <span class="step-arrow">→</span>
+    </div>
+    <div class="step">
+      <span class="step-num">02</span>
+      <h4>We Build a Plan</h4>
+      <p>Whether buying, selling, or renting — I put together a strategy tailored to your situation and the current market.</p>
+      <span class="step-arrow">→</span>
+    </div>
+    <div class="step">
+      <span class="step-num">03</span>
+      <h4>We Execute</h4>
+      <p>Showings, offers, listings, negotiations — I handle the details and keep you informed at every stage so nothing falls through the cracks.</p>
+      <span class="step-arrow">→</span>
+    </div>
+    <div class="step">
+      <span class="step-num">04</span>
+      <h4>You Close</h4>
+      <p>Keys in hand, lease signed, or property sold — with a smooth close and a clear understanding of every step that got you there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-left">
+    <div class="section-eyebrow">About Alexa</div>
+    <h2 class="section-title">Local knowledge.<br><em>Personal attention.</em></h2>
+    <p>I'm a Connecticut-licensed real estate agent with deep roots in the West Hartford and Greater Hartford market. I work with buyers, sellers, renters, and landlords — bringing the same level of care and professionalism to every transaction, regardless of size.</p>
+    <p>Real estate is one of the most significant decisions people make. My job is to make sure you feel informed, confident, and supported every step of the way.</p>
+    <ul class="cred-list">
+      <li>Connecticut Licensed Real Estate Salesperson</li>
+      <li>Residential & Multi-Family Specialist</li>
+      <li>West Hartford & Greater Hartford Region</li>
+      <li>Buyers · Sellers · Renters · Landlords</li>
+    </ul>
+  </div>
+
+  <div class="about-right">
+    <div class="value-row">
+      <div class="value-num">01</div>
+      <div class="value-text">
+        <h4>Honest Guidance</h4>
+        <p>I tell you what you need to hear, not just what you want to hear. Clear advice leads to better decisions.</p>
+      </div>
+    </div>
+    <div class="value-row">
+      <div class="value-num">02</div>
+      <div class="value-text">
+        <h4>Market Knowledge</h4>
+        <p>I know the Greater Hartford market — pricing trends, neighborhoods, and what's actually moving right now.</p>
+      </div>
+    </div>
+    <div class="value-row">
+      <div class="value-num">03</div>
+      <div class="value-text">
+        <h4>Responsive & Attentive</h4>
+        <p>You won't be passed off to an assistant. You work directly with me from start to finish.</p>
+      </div>
+    </div>
+    <div class="value-row">
+      <div class="value-num">04</div>
+      <div class="value-text">
+        <h4>Multi-Family Experience</h4>
+        <p>From single-family homes to multi-unit rentals — I bring hands-on knowledge to both sides of the transaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET AREAS -->
+<section class="market-section" id="markets">
+  <div class="section-eyebrow">Where I Work</div>
+  <h2 class="section-title">Serving the <em>Greater Hartford Region</em></h2>
+
+  <div class="market-grid">
+    <div class="market-card">
+      <div class="m-label">Primary Market</div>
+      <h3>West Hartford</h3>
+      <p>One of Connecticut's most sought-after towns — vibrant walkable neighborhoods, excellent schools, and a diverse mix of condos, single-family homes, and multi-family properties.</p>
+      <div class="m-tags">
+        <span class="m-tag">Buyers</span>
+        <span class="m-tag">Sellers</span>
+        <span class="m-tag">Rentals</span>
+      </div>
+    </div>
+    <div class="market-card">
+      <div class="m-label">Regional Coverage</div>
+      <h3>Greater Hartford</h3>
+      <p>Farmington, Glastonbury, Newington, Wethersfield, Simsbury, Avon, and surrounding towns — I work across the region to find the right fit for every client.</p>
+      <div class="m-tags">
+        <span class="m-tag">Buyers</span>
+        <span class="m-tag">Sellers</span>
+        <span class="m-tag">Residential</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="review-section" id="reviews">
+  <div class="review-inner">
+    <div class="section-eyebrow">Client Reviews</div>
+    <h2 class="section-title">Share your <em>experience</em></h2>
+    <p class="review-sub">Worked together? I'd love to hear about your experience — it takes less than a minute.</p>
+
+    <form class="review-form" action="https://formspree.io/f/alexabush.re@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Client Review — Alexa Bush Real Estate">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="r-name">Your Name</label>
+          <input type="text" id="r-name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="r-type">Client Type</label>
+          <select id="r-type" name="client_type" required>
+            <option value="" disabled selected>Select one…</option>
+            <option value="Buyer">Buyer</option>
+            <option value="Seller">Seller</option>
+            <option value="Renter">Renter</option>
+            <option value="Landlord / Owner">Landlord / Owner</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="star-row">
+          <input type="radio" id="s5" name="rating" value="⭐⭐⭐⭐⭐"><label for="s5" class="star">★</label>
+          <input type="radio" id="s4" name="rating" value="⭐⭐⭐⭐"><label for="s4" class="star">★</label>
+          <input type="radio" id="s3" name="rating" value="⭐⭐⭐"><label for="s3" class="star">★</label>
+          <input type="radio" id="s2" name="rating" value="⭐⭐"><label for="s2" class="star">★</label>
+          <input type="radio" id="s1" name="rating" value="⭐"><label for="s1" class="star">★</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="r-review">Your Review</label>
+        <textarea id="r-review" name="review" rows="5" placeholder="Tell me about your experience working together…" required></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Submit Review</button>
+      <p class="form-note">Your review will be sent directly to Alexa.</p>
+    </form>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h2 class="contact-title">Ready to make<br>your <em>next move?</em></h2>
+    <p class="contact-sub">Buying, selling, renting, or listing — reach out and I'll get back to you within one business day to talk through your goals.</p>
+    <a href="mailto:alexabush.re@gmail.com" class="contact-email">alexabush.re@gmail.com</a>
+    <a href="mailto:alexabush.re@gmail.com" class="contact-link">Send a Message</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Alexa <span>Bush</span></a>
+  <p>© 2025 Alexa Bush · Connecticut Licensed Real Estate Agent · Greater Hartford Region</p>
+  <div class="footer-links">
+    <a href="#who">Services</a>
+    <a href="#markets">Markets</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
