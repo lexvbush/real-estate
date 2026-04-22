@@ -740,8 +740,9 @@
     <h3>101 Hillcrest Road — Agent Commentary</h3>
     <p>Based on four closed sales of Cape Cod style single-family homes in Glastonbury between August and December 2025, the estimated current market value for 101 Hillcrest Road falls in the range of <strong>$537,000 to $560,000</strong>. All four comparables sold above their list prices, with a sale-to-list ratio ranging from 107% to 115%, indicating strong buyer demand and limited inventory for this property type in this market.</p>
     <p>The subject property's most significant differentiating feature is its 1.40-acre lot — the largest in this comparable set by a wide margin, where other lots ranged from 0.37 to 0.89 acres. 73 Water Street, which shares the same 1952 construction year, achieved a sold price of $550,000 despite having no garage. The subject's 2-car attached garage and public sewer connection place it favorably above that benchmark.</p>
+    <p>One notable difference between the subject and all four comparables is the bathroom count. The subject property has 1 full bath and 1 half bath, while every comparable sold with 2 full baths. This distinction may be a factor in valuation, as buyers generally tend to assign value to a second full bath. It is one key reason the estimated sale price may sit closer to the middle of the comparable range, though individual buyer preferences and market conditions at the time of sale will ultimately determine price.</p>
     <p>The highest-value comparable, 130 Overlook Road ($560,000), benefited from an extensively renovated interior and exterior, which is reflected in its higher $/sqft. The subject property's prior sale occurred in 2018 at $321,000, representing appreciation of approximately 67–74% to the current estimated range — consistent with broader Glastonbury market trends over that period.</p>
-    <p>Based on this analysis, 101 Hillcrest Road would most likely sell for approximately <strong>$549,000–$555,000</strong>.</p>
+    <p>Based on this analysis, 101 Hillcrest Road would most likely sell for approximately <strong>$537,000–$549,000</strong>.</p>
   </div>
 
 </div>
@@ -764,61 +765,7 @@
     <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M5 1h6l2 2v3H3V3L5 1zm0 1v3h6V3.414L9.586 2H5zM2 7h12v6H2V7zm1 1v4h10V8H3z"/></svg>
     Print / Save PDF
   </button>
-  <button class="btn-export btn-email" onclick="document.getElementById('emailModal').classList.add('open')">
-    <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3zm1 0v.217l6 3.6 6-3.6V3H2zm12 1.383-5.553 3.332a.75.75 0 0 1-.794 0L2 4.383V13h12V4.383z"/></svg>
-    Email CMA
-  </button>
 </div>
 
-<!-- EMAIL MODAL -->
-<div class="modal-backdrop no-print" id="emailModal">
-  <div class="modal">
-    <h2>Email this CMA</h2>
-    <p class="modal-sub">Opens in your default mail client.</p>
-    <div class="modal-field">
-      <label>To</label>
-      <input type="email" id="emailTo" placeholder="Client email address">
-    </div>
-    <div class="modal-field">
-      <label>From</label>
-      <input type="email" id="emailFrom" value="alexa@bushre.com">
-    </div>
-    <div class="modal-field">
-      <label>Subject</label>
-      <input type="text" id="emailSubject" value="Comparative Market Analysis — 101 Hillcrest Road, Glastonbury CT">
-    </div>
-    <div class="modal-field">
-      <label>Message</label>
-      <textarea id="emailBody">Katherine,
-
-Please find your Comparative Market Analysis for 101 Hillcrest Road. Based on four recent comparable sales in Glastonbury, the estimated market value of your property falls in the range of $537,000 to $560,000.
-
-I'm happy to walk through the details or answer any questions.
-
-Alexa Bush
-Bush Real Estate
-alexa@bushre.com · (860) 990-2728
-801 Farmington Ave, Suite 3A · West Hartford, CT 06119
-RES.0833449 · Supervised by Richard Bush, Broker</textarea>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" onclick="document.getElementById('emailModal').classList.remove('open')">Cancel</button>
-      <button class="btn-send" onclick="sendEmail()">Open in Mail</button>
-    </div>
-  </div>
-</div>
-
-<script>
-function sendEmail() {
-  const to = document.getElementById('emailTo').value;
-  const subject = encodeURIComponent(document.getElementById('emailSubject').value);
-  const body = encodeURIComponent(document.getElementById('emailBody').value);
-  window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-  document.getElementById('emailModal').classList.remove('open');
-}
-document.getElementById('emailModal').addEventListener('click', function(e) {
-  if (e.target === this) this.classList.remove('open');
-});
-</script>
 </body>
 </html>
